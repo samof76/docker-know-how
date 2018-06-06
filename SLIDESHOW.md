@@ -1,5 +1,7 @@
 # Docker Know How
 
+An Introduction to Containers
+
 ---
 
 # Agenda
@@ -23,7 +25,7 @@
 
 # Containers
 
-Its is important to know that containers are not new this world by any means.
+It is important to know that containers are not new this world, by any means.
 
 - BSD Jails
 - Sun Zones
@@ -31,6 +33,8 @@ Its is important to know that containers are not new this world by any means.
 - LXC - Still Active Development
 
 Think of Containers as chroot on steroids, minus the virtualized hardware, and but with all the isolations primitives of a VM.
+
+![vm vs container](http://www.electronicdesign.com/sites/electronicdesign.com/files/uploads/2015/02/0716_CTE_WTDcontainers_F1WEB.gif)
 
 ---
 
@@ -204,6 +208,14 @@ Though docker was moving along pretty fast but there was one problem, the docker
 
 ---
 
+# Big Picture
+
+The following depict all of the things we discussed above put together.
+
+![docker process](https://image.slidesharecdn.com/containerdandrunc-160511165032/95/docker-111-meetup-containerd-and-runc-by-arnaud-porterie-and-michael-crosby-10-638.jpg?cb=1462985511)
+
+---
+
 # Moby
 
 - [Upsteam Opensource Project to Docker](https://github.com/moby/moby/pull/32691)
@@ -211,4 +223,37 @@ Though docker was moving along pretty fast but there was one problem, the docker
 - Spun off in 2017
 
 ---
+# daemon.json
 
+- Docker starts with default configuration
+- `/etc/docker/daemon.json`
+- `man dockerd` to see defaults
+- To debug set it in this file
+
+```json
+{
+  'debug': true
+}
+```
+---
+
+# Dockerfile
+
+- Definition to build docker images
+- Derives `FROM` other other docker images
+- [Docker hub](https://hub.docker.com) is repo of images
+  - Verfied
+  - Non verified
+- `RUN`, `CMD`, `ENTRYPOINT`
+
+```
+FROM alpine
+
+RUN apk update
+RUN apk add nginx
+
+RUN mkdir -p /run/nginx
+
+EXPOSE 80
+CMD ["/usr/sbin/nginx","-g","daemon off;"]
+```
