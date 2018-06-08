@@ -63,6 +63,10 @@ The above a features that are provided by modern linux kernel makes isolation, c
 
 As mentioned earlier, linux containers precede docker by an technological epoch. They broke into mainstream linux distros in almost the end of the first decade of the new mellinium. On popular linux distros they went by the name LXC(Linux Containers), and inside Google they were called lmctfy(Let Me Contain That For You).
 
+Here is a diagram depict how conatainers compare with normal VMs.
+
+![VM vs Container](https://github.com/samof76/docker-know-how/raw/master/images/vm_vs_container.png)
+
 ### LXC
 
 LXC provided good abrstactions over the Namespaces, CGroups and Capabilities, to contain linux images like ubuntu or fedora. This project is in active development, fixing many of the security and resource management flaws, as they try to me more mainstream. But somehow they failed to captivate the imagination as much as docker did. I feel that the reasons for these where
@@ -97,7 +101,7 @@ It is very important to know the stages of development that docker went through 
 
 This really early stages of Docker, when it was [first out in the open](https://github.com/docker/engine/tree/5130d3d6ec979ea2d1f9a0da9d5766028571dd9e), docker was a wrapper or facade to the LXC's capabilities. That all the container lifecycle operations were handled by `lxc`, and docker was the both the client and service. The client for the CLI tool to offer command, and subcommands, that would talk to docker engine through an API and docker engine will inturn speaks to `lxc` , for containers. The diagram shows the, control flow.
 
-<<< DIAGRAM: docker + lxc >>>
+![Docker on LXC](https://github.com/samof76/docker-know-how/raw/master/images/docker_using_lxc.png)
 
 The marriage will not last very long, as the unprecedented response to this docker's methodology led the way to a sea of requests for improvements. And docker had to look inwards for these two reasons.
 - LXC was linux specific, and had no road map for the supporting multiple platforms
@@ -149,7 +153,7 @@ First it allows the runtimes, i.e. runc,to exit after it starts the container.  
 
 Second it keeps the STDIO and other fds open for the container incase `docker-containerd` and/or docker daemon both die.  If the shim was not running then the parent side of the pipes or the TTY master would be closed and the container would exit.  
 
-Finally it allows the container's exit status to be reported back to docker daemon.
+Finally it allows the container's exit status to be reported back to `docker-containerd`.
 
 ### docker daemon
 
@@ -159,6 +163,6 @@ Now that all of the functionality has been stripped off, what remains of the doc
 
 The here is the diagram to depict how all the above pieces fit together to provide docker ability to create, run, start, stop and delete containers.
 
-<<DIAGRAM: Docker Architecture>>
+![Docker Current Picture](https://github.com/samof76/docker-know-how/raw/master/images/docker_current_state.png)
 
 So when a user gives 
