@@ -4,7 +4,7 @@ Well i took up this putting myself in the spot of teaching docker and its intern
 
 First up a bit of history to how docker came about. [dotCloud](https://dotcloud.com), is YC funded company, with the ambition of changing how application are deployed, in moment I will talk about just that. But the company was not did not really take off as it would like, in [PyCon 2013](), Solomon Hykes gave this lightening talk...
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wW9CAH9nSLs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+[![Solomon Hykes at PyCon 2013](https://img.youtube.com/vi/wW9CAH9nSLs/0.jpg)](https://youtu.be/wW9CAH9nSLs)
 
 As one of the comments says _"This is video should do into the computer history museum."_, I believe it should.
 
